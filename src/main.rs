@@ -65,7 +65,7 @@ fn make_move(board: &mut [BoardSpace; 9], player: &BoardSpace, space: usize) -> 
     if board[space] != BoardSpace::Empty {
         return Err(anyhow::anyhow!("Attempted to make move on a non-empty space."));
     }
-    (*board)[space] = player.clone();
+    board[space] = player.clone();
     Ok(())
 }
 
@@ -98,7 +98,7 @@ fn get_player_move(board: &mut [BoardSpace; 9], player: &BoardSpace) {
             Ok(res) => {
                 // linter told me 0 is minimum for usize so no need to check
                 if res <= 8usize {
-                    match make_move(board, &player, res) {
+                    match make_move(board, player, res) {
                         Ok(_) => {
                             return;
                         }
